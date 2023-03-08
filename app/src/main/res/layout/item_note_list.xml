@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Note 1 "/>
+
+            <TextView
+                android:id="@+id/exerpt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_marginTop="30sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi turpis tellus, varius id augue vitae, accumsan lacinia orci. Donec vitae bibendum risus, id posuere mi. In pulvinar dignissim ipsum, et sodales risus tincidunt id. Aliquam fringilla urna sed orci facilisis pellentesque vel eget ipsum. Nullam auctor erat eu odio hendrerit scelerisque. Vestibulum gravida erat varius eros elementum, sit amet scelerisque lorem sagittis. Praesent nec semper erat, ut congue nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur id elementum turpis. Donec venenatis nec risus vitae iaculis. Aliquam mattis erat ac elit venenatis egestas" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+
