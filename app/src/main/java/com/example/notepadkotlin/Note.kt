@@ -30,7 +30,8 @@ data class Note(
                 }
 
                 override fun newArray(size: Int): Array<Note?> {
-                        return arrayOfNulls(size)                }
+                        return arrayOfNulls(size)
+                }
         }
 
 
