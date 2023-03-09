@@ -53,14 +53,21 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun processEditNoteResult(data: Intent) {
         val noteIndex = data.getIntExtra(NoteDetailsActivity.EXTRA_NOTE_INDEX, -1)
-        val note = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-            Log.i("Mon probleme", "je suis dans tiramisu")
-            data.getParcelableExtra(NoteDetailsActivity.EXTRA_NOTE, Note::class.java)!!
-        } else {
-            Log.i("Mon probleme", "je suis  déprécié")
-            data.getParcelableExtra<Note>(NoteDetailsActivity.EXTRA_NOTE)!!
-        }
-        saveNote(note, noteIndex)
+       when(data.action) {
+           NoteDetailsActivity.ACTION_SAVE_NOTE -> {
+               val note = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                   Log.i("Mon probleme", "je suis dans tiramisu")
+                   data.getParcelableExtra(NoteDetailsActivity.EXTRA_NOTE, Note::class.java)!!
+               } else {
+                   Log.i("Mon probleme", "je suis  déprécié")
+                   data.getParcelableExtra<Note>(NoteDetailsActivity.EXTRA_NOTE)!!
+               }
+               saveNote(note, noteIndex)
+           }
+           NoteDetailsActivity.ACTION_DELETE_NOTE -> {
+               deleteNote(noteIndex)
+           }
+       }
     }
 
 
@@ -85,6 +92,15 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         }else {
             notes[noteIndex] = note
         }
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun deleteNote(noteIndex: Int) {
+        if(noteIndex < 0) {
+            return
+        }
+        val note = notes.removeAt(noteIndex)
+
         adapter.notifyDataSetChanged()
     }
 
