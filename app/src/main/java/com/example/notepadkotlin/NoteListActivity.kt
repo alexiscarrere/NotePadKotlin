@@ -11,6 +11,7 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -23,6 +24,9 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        findViewById<FloatingActionButton>(R.id.create_note_fab).setOnClickListener(this)
+
 
         notes = mutableListOf<Note>()
         notes.add(Note("Note 1 ", "Alexis doit nourrir le chien"))
@@ -64,16 +68,28 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         if (view.tag != null) {
             //Log.i("NoteActivity", "click sur une note")
             showNoteDetail(view.tag as Int)
+        } else {
+            when(view.id){
+                R.id.create_note_fab -> createNewNote()
+            }
         }
     }
 
+    fun createNewNote() {
+        showNoteDetail(-1)
+    }
+
     fun saveNote(note: Note, noteIndex: Int){
-        notes[noteIndex] = note
+        if (noteIndex < 0){
+            notes.add(0, note)
+        }else {
+            notes[noteIndex] = note
+        }
         adapter.notifyDataSetChanged()
     }
 
     fun showNoteDetail(noteIndex : Int) {
-        val note = notes[noteIndex]
+        val note = if(noteIndex<0) Note() else notes[noteIndex]
         val intent = Intent(this, NoteDetailsActivity::class.java)
 
         intent.putExtra(NoteDetailsActivity.EXTRA_NOTE, note)
