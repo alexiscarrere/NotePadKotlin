@@ -18,6 +18,7 @@
     android:id="@+id/notes_recycler_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_below="@+id/toolbar"
     tools:listitem="@layout/item_note_list"
     />
 
